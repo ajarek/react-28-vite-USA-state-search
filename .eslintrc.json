@@ -1,0 +1,71 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": ["plugin:react/recommended", "airbnb"],
+	"overrides": [],
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": ["react", "react-hooks"],
+	"rules": {
+		"no-eval":0,
+		"react/prop-types": 0,
+		"linebreak-style": 0,
+		"semi":["error","never"],
+		"react/jsx-curly-spacing": [
+			"warn",
+			"never",
+			{
+					"allowMultiline": true
+			}
+	],
+	"react/jsx-curly-brace-presence": [
+			"warn",
+			{
+					"props": "always",
+					"children": "never"
+			}
+	],
+	"react/jsx-max-props-per-line": [
+			"warn"
+	],
+	"react/jsx-indent": [
+			"warn",
+			2
+	],
+	"react/jsx-indent-props": [
+			"warn",
+			2
+	],
+	"react/jsx-closing-tag-location": [
+			"warn"
+	],
+	"react/jsx-closing-bracket-location": [
+			"warn"
+	],
+	"react/jsx-first-prop-new-line": [
+			"warn",
+			"multiline"
+	],
+		"react/react-in-jsx-scope": 0,
+		"no-console": 0,
+		"react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+		"react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+		"import/no-extraneous-dependencies": [
+			"error",
+			{
+				"devDependencies": [
+					" **/*.test.{ts,tsx}",
+					"**/*.spec.{ts,tsx}",
+					"**/*.story.tsx",
+					" **/__tests__/**",
+					" **/__mocks__/**",
+					"./config/**/*.js"
+				]
+			}
+		]
+	}
+}
