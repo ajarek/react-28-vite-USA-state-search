@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Header() {
+function Header({ onChange, value }) {
   return (
     <div
       className={'header'}
@@ -15,6 +15,8 @@ function Header() {
           name={''}
           id={''}
           placeholder={'...name of the state'}
+          onChange={onChange}
+          value={value}
         />
       </div>
     </div>
