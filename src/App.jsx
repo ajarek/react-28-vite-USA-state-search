@@ -1,4 +1,6 @@
-import { useState, useMemo } from 'react'
+import {
+  useState, useMemo, useRef, useEffect,
+} from 'react'
 import Header from './components/Header'
 import { useFetch } from './components/useFetch'
 import { Item } from './components/Item'
@@ -7,9 +9,14 @@ import { Loading } from './components/Loading'
 import { ErrorMessage } from './components/ErrorMessage'
 
 export function App() {
+  const searchInput = useRef(null)
   const [valueSearch, setValueSearch] = useState('')
   const [singleState, setSingleState] = useState('')
   const { data, error, pending } = useFetch('src/assets/states.json')
+
+  useEffect(() => {
+    searchInput.current.focus()
+  }, [])
 
   const filteredData = useMemo(() => data?.filter((item) => item.state.toLowerCase()
     .includes(valueSearch.toLowerCase())), [data, valueSearch])
@@ -51,6 +58,7 @@ export function App() {
             <Header
               onChange={InputSearch}
               value={valueSearch}
+              focus={searchInput}
             />
             <div className={'wrapper'}>
               {filteredData && filteredData.map((el) => (
