@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import Header from './components/Header'
 import { useFetch } from './components/useFetch'
+import { Item } from './components/Item'
+import { State } from './components/State'
 
 export function App() {
   const [valueSearch, setValueSearch] = useState('')
@@ -13,8 +15,10 @@ export function App() {
   const showState = (e) => {
     // eslint-disable-next-line no-return-assign, no-param-reassign
     const getDataId = data.find((dat) => dat.admission_number === Number(e.target.id))
-    setSingleState((singleState) => getDataId)
-    console.log(singleState)
+    setSingleState(getDataId)
+  }
+  const switchView = () => {
+    setSingleState('')
   }
 
   return (
@@ -22,35 +26,18 @@ export function App() {
 
       {singleState
         ? (
-          <div
-            className={'wrapper-state'}
-          >
-            <div className={'header-state'}>
-              <h1>{singleState.state}</h1>
-              <div className={'seal'}><img src={singleState.state_seal_url} alt={'seal'} /></div>
-            </div>
-            <div className={'img'}>
-              <img src={singleState.skyline_background_url} alt={'skyline'} />
-              <img src={singleState.map_image_url} alt={'map'} />
-            </div>
-            <div className={'info'}>
-              <p>
-                Capital city:
-                {' '}
-                {singleState.capital_city}
-              </p>
-              <p>
-                Population:
-                {' '}
-                {singleState.population}
-              </p>
-              <p>
-                Admission date:
-                {' '}
-                {singleState.admission_date}
-              </p>
-            </div>
-          </div>
+          <State
+            type={'button'}
+            className={'btn-home'}
+            onClick={switchView}
+            nameState={singleState.state}
+            srcSeal={singleState.state_seal_url}
+            srcSkyline={singleState.skyline_background_url}
+            srcMap={singleState.map_image_url}
+            capital={singleState.capital_city}
+            population={singleState.population}
+            admission={singleState.admission_date}
+          />
         )
         : (
           <>
@@ -58,25 +45,20 @@ export function App() {
               onChange={InputSearch}
               value={valueSearch}
             />
-
             <div className={'wrapper'}>
               {data && data.map((el) => (
-              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-                <div
-                  className={'item'}
-                  key={el.admission_number}
+                <Item
+                  key={el.state}
                   onClick={showState}
-                >
-                  <img src={el.landscape_background_url} alt={'landscape'} id={el.admission_number} />
-                  <p className={'name-state'}>{el.state}</p>
-
-                </div>
+                  src={el.landscape_background_url}
+                  alt={'landscape'}
+                  id={el.admission_number}
+                  state={el.state}
+                />
               ))}
-
             </div>
           </>
         )}
-
     </div>
   )
 }

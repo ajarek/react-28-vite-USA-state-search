@@ -90,6 +90,7 @@ body {
 	width: 1000px;
 	margin: 2rem 0;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 }
 .img img{
@@ -110,4 +111,17 @@ body {
 .seal img{
 	width: 100%;
 	object-fit: cover;
+}
+.btn-home{
+	position: absolute;
+	top: 2%;
+	left: 2%;
+  font-size: 2rem;
+	cursor: pointer;
+	border: none;
+	box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.5);
+	transition: 0.1s ease-in-out;
+}
+.btn-home:hover{
+	font-size: 2.1rem;
 }
