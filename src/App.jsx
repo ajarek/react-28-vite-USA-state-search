@@ -1,19 +1,23 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Header from './components/Header'
 import { useFetch } from './components/useFetch'
 import { Item } from './components/Item'
 import { State } from './components/State'
+import { Loading } from './components/Loading'
+import { ErrorMessage } from './components/ErrorMessage'
 
 export function App() {
   const [valueSearch, setValueSearch] = useState('')
   const [singleState, setSingleState] = useState('')
-  const { data, error } = useFetch('src/assets/states.json')
+  const { data, error, pending } = useFetch('src/assets/states.json')
+
+  const filteredData = useMemo(() => data?.filter((item) => item.state.toLowerCase()
+    .includes(valueSearch.toLowerCase())), [data, valueSearch])
 
   const InputSearch = (e) => {
     setValueSearch(e.target.value)
   }
   const showState = (e) => {
-    // eslint-disable-next-line no-return-assign, no-param-reassign
     const getDataId = data.find((dat) => dat.admission_number === Number(e.target.id))
     setSingleState(getDataId)
   }
@@ -23,7 +27,10 @@ export function App() {
 
   return (
     <div className={'App'}>
-
+      {error ? <ErrorMessage>{error}</ErrorMessage> : null}
+      {pending
+        ? <Loading />
+        : null}
       {singleState
         ? (
           <State
@@ -46,7 +53,7 @@ export function App() {
               value={valueSearch}
             />
             <div className={'wrapper'}>
-              {data && data.map((el) => (
+              {filteredData && filteredData.map((el) => (
                 <Item
                   key={el.state}
                   onClick={showState}

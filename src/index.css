@@ -125,3 +125,45 @@ body {
 .btn-home:hover{
 	font-size: 2.1rem;
 }
+.wrapper-loading,.wrapper-message{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 100;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+}
+.loading{
+	width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border-left: 20px solid red;
+  border-top: 20px solid green;
+  border-right: 20px solid blue;
+  border-bottom: 20px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: rotation 2s infinite linear;
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1590deg);
+  }
+}
+.message{
+	font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: BlueViolet;
+  text-transform: capitalize;
+  border: 1px solid BlueViolet;
+  padding: 0.5rem;
+}
